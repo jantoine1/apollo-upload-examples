@@ -6,7 +6,8 @@ import { ApolloServer } from "@apollo/server";
 import { ApolloServerPluginDrainHttpServer } from "@apollo/server/plugin/drainHttpServer";
 import { koaMiddleware as apolloServerKoa } from "@as-integrations/koa";
 import corsKoa from "@koa/cors";
-import graphqlUploadKoa from "graphql-upload/graphqlUploadKoa.mjs";
+// import graphqlUploadKoa from "graphql-upload/graphqlUploadKoa.mjs";
+import { graphqlUploadKoa } from "graphql-upload-ts";
 import http from "http";
 import Koa from "koa";
 import bodyParserKoa from "koa-bodyparser";
@@ -34,6 +35,8 @@ app.use(
     // such as NGINX so errors can be handled elegantly by `graphql-upload`.
     maxFileSize: 10000000, // 10 MB
     maxFiles: 20,
+    // Doesn't seem to matter weather true or false.
+    overrideSendResponse: false,
   })
 );
 app.use(bodyParserKoa());
